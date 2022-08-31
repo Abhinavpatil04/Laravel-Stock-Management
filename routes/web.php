@@ -9,8 +9,10 @@ Route::get('/home', function () {
     return redirect()->route('library.home');
 });
 
+Route::post('/fetchrecord/{id}',[AjaxController::class,'fetchrecord']);
 Auth::routes();
 // Library
+
 
 Route::group(['prefix' => 'library', 'as' => 'library.', 'namespace' => 'Library', 'middleware' => ['auth']], function () {
     Route::redirect('/', '/login')->name('home');
@@ -42,12 +44,24 @@ Route::group(['prefix' => 'library', 'as' => 'library.', 'namespace' => 'Library
     Route::resource('dashboard', 'DashboardController');
 
     // Transactions
-   Route::delete('transactions/destroy', 'TransactionsController@massDestroy')->name('transactions.massDestroy');
+    Route::delete('transactions/destroy', 'TransactionsController@massDestroy')->name('transactions.massDestroy');
     Route::post('transactions/{stock}/storeStock', 'TransactionsController@storeStock')->name('transactions.storeStock');
     Route::resource('transactions', 'TransactionsController');
+    
+    Route::get('transactions/fetchrecord', 'TransactionsController@fetchrecord')->name('library.transactions.fetchrecord');;
     Route::post('transactions/getAssetName', 'TransactionsController@getAssetName')->name('transactionGetAssetName.post');
 
 });
+Route::get('ajax',function() {
+    return view('message');
+ });
+ Route::post('/getmsg','AjaxController@index');
+
+Route::post('ajaxcontroller/fetchrecord',function () {
+    echo"sucessss";
+    } )->name('ajaxcontroller.fetchrecord');
+
+
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {

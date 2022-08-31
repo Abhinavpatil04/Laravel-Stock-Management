@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{@coreui/coreui, all, bootstrap, buttons.colVis, buttons.dataTables, buttons.flash, buttons.html5, buttons.print, ckeditor, dataTables.buttons, dropzone, jszip, moment.js, pdfmake, popper.js, select.dataTables, select2, vfs_fonts}" />
+  </component>
+</project>

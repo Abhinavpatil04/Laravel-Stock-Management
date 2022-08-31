@@ -70,14 +70,40 @@
         </form>
     </div>
 </div>
-
+<meta name="_token" content="{{ csrf_token() }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script type="text/javascript">
 
+    $.ajaxSetup({
+           headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+               }
+       });
+
         document.getElementById('asset_id').onkeyup = function(){
+
             if((this.value).length === 10){
-                document.getElementById('asset_name_text').style.display = 'block';
-                document.getElementById('asset_name_text').disabled = true;
+                //let rfid = jQuery(this).val();
+                $.ajax({
+               type:'POST',
+               url:'/getmsg',
+               data:'_token = <?php echo csrf_token() ?>',
+               success:function(data) {
+                  $("#asset_name_text").html(data.msg);
+               }
+            });
+               /* jQuery.ajax({
+               url:"/fetchrecord",
+                type: 'GET',
+                data: { testdata : 'testdataccontewnt',_token=&_token={{csrf_token()}} },//data: 'rfid='+rfid+'&_token={{csrf_token()}}',
+                success:function(data){
+                   alert(data);       
+                },error:function(){
+                    alert("error!!!");
+                }
+                }); */
+                document.getElementById('asset_name_text').style.display = 'none';
+                document.getElementById('asset_name_text').disabled = false;
                 document.getElementById('select_asset').style.display = 'none';
             }else {
                 document.getElementById('asset_name_text').style.display = 'none';
@@ -85,9 +111,35 @@
                 document.getElementById('select_asset').style.display = 'block';
             }
         }
+        $.ajaxSetup({
+              headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+               }
+             });
         document.getElementById('member_id').onkeyup = function(){
-            if((this.value).length === 10){
-                document.getElementById('user_id_text').style.display = 'block';
+
+            if((jQuery('#member_id').val()).length === 10){
+                var rfid = jQuery('#member_id').val();
+
+                $.ajax({
+                    url:'{{ url("/fetchrecord/") }}/'+rfid,
+                    type: 'post',
+                    datatype: 'json',
+                    success: function(response){
+                        console.log(response);
+                    }
+                })
+              
+            /*    $.ajax({
+                    
+                    url:"{{route('ajaxcontroller.fetchrecord')}}",
+                    method:"GET",
+                    data:{rfid:rfid},
+                    success:function(result)
+                    {
+                        console.log(result);
+                    }
+                });*/
+              document.getElementById('user_id_text').style.display = 'block';
                 document.getElementById('user_id_text').disabled = true;
                 document.getElementById('select_user').style.display = 'none';
             }else {
