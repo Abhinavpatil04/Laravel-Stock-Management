@@ -22,7 +22,7 @@
             </div>
             <div class="form-group col-6">
                 <label for="asset_name">{{ trans('cruds.transaction.fields.asset') }}</label>
-                <input class="form-control {{ $errors->has('asset_name') ? 'is-invalid' : '' }}" name="asset_name" id="asset_name_text" style="display: none;">
+                <textarea class="form-control {{ $errors->has('asset_name') ? 'is-invalid' : '' }}" name="asset_name" id="asset_name_text" style="display: none; background-color: white; color: black;"></textarea>
                 <div id="select_asset"><select class="form-control select2 {{ $errors->has('asset_name') ? 'is-invalid' : '' }}" name="asset_name" id="asset_name">
                     @foreach($assets as $id => $asset)
                         <option value="{{ $id }}" {{ old('asset_name') == $id ? 'select' : '' }}>{{ $asset }}</option>
@@ -70,84 +70,46 @@
         </form>
     </div>
 </div>
-<meta name="_token" content="{{ csrf_token() }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script type="text/javascript">
 
-    $.ajaxSetup({
-           headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
-               }
-       });
-
         document.getElementById('asset_id').onkeyup = function(){
-
             if((this.value).length === 10){
-                //let rfid = jQuery(this).val();
-                $.ajax({
-               type:'POST',
-               url:'/getmsg',
-               data:'_token = <?php echo csrf_token() ?>',
-               success:function(data) {
-                  $("#asset_name_text").html(data.msg);
-               }
-            });
-               /* jQuery.ajax({
-               url:"/fetchrecord",
-                type: 'GET',
-                data: { testdata : 'testdataccontewnt',_token=&_token={{csrf_token()}} },//data: 'rfid='+rfid+'&_token={{csrf_token()}}',
-                success:function(data){
-                   alert(data);       
-                },error:function(){
-                    alert("error!!!");
-                }
-                }); */
-                document.getElementById('asset_name_text').style.display = 'none';
-                document.getElementById('asset_name_text').disabled = false;
+                document.getElementById('asset_name_text').style.display = 'block';
+                document.getElementById('asset_name_text').disabled = true;
                 document.getElementById('select_asset').style.display = 'none';
+                getBookDetails(this.value);
             }else {
                 document.getElementById('asset_name_text').style.display = 'none';
                 document.getElementById('asset_name_text').disabled = true;
                 document.getElementById('select_asset').style.display = 'block';
             }
         }
-        $.ajaxSetup({
-              headers:{'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
-               }
-             });
-        document.getElementById('member_id').onkeyup = function(){
+        function getBookDetails(val) {
+            const div =  document.getElementById('asset_name_text');
+            $.ajax({
+                url:'http://127.0.0.1:8000/library/transactions/getBookDetails/'+val,
+                type:'get',
+                dataType:'json',
+                success:function(response) {
+                    if(response['data']!= null){
+                        const name = response['data'][0].name;
+                        const author = response['data'][0].author;
+                        const publication = response['data'][0].publication;
+                        const edition = response['data'][0].edition;
+                        const language = response['data'][0].language;
+                        const cost = response['data'][0].cost;
 
-            if((jQuery('#member_id').val()).length === 10){
-                var rfid = jQuery('#member_id').val();
+                        div.innerHTML = "Name: "+name+"\nAuthor: "+ author + "\nPublication: "+ publication +"\nEdition: "+ edition+ "\nLanguage: "+ language+ "\nCost: "+ cost;
+                       // div.innerHTML = "<strong>Name: </strong>" + name + "<br><strong> Author: </strong>" + author + "<br><strong> Publication: </strong>" + publication + "<br><strong> Edition: </strong>" + edition;
+                    }
+                }
+            })
 
-                $.ajax({
-                    url:'{{ url("/fetchrecord/") }}/'+rfid,
-                    type: 'post',
-                    datatype: 'json',
-                    success: function(response){
-                        console.log(response);
-                    }
-                })
-              
-            /*    $.ajax({
-                    
-                    url:"{{route('ajaxcontroller.fetchrecord')}}",
-                    method:"GET",
-                    data:{rfid:rfid},
-                    success:function(result)
-                    {
-                        console.log(result);
-                    }
-                });*/
-              document.getElementById('user_id_text').style.display = 'block';
-                document.getElementById('user_id_text').disabled = true;
-                document.getElementById('select_user').style.display = 'none';
-            }else {
-                document.getElementById('user_id_text').style.display = 'none';
-                document.getElementById('user_id_text').disabled = true;
-                document.getElementById('select_user').style.display = 'block';
-            }
         }
+
+
 
 
     </script>

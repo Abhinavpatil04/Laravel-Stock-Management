@@ -36,11 +36,6 @@ class TransactionsController extends Controller
 
         return view('library.transactions.index', compact('transactions'));
     }
-      
-    public function fetchrecord(Request $request)
-    {
-      echo " adsadasd";
-    }
 
     /**
      * @return Factory|View
