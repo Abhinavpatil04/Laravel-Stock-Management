@@ -32,6 +32,18 @@ class UsersTableSeeder extends Seeder
                 'team_id'        => '1',
             ],
         ];
+        $users2 = [
+            [
+                'id'             => 3,
+                'fname'           => 'Abhinav',
+                'lname'          => 'Patil',
+                'email'          => 'AbhinavPatil@adivid.com',
+                'mobile'         => '7757927701',
+                'password'       => '$2y$10$MpxRwnNxj1uMrOojL.ptFOAg.awAdJZB1oNlOfaiVrLXLGyDIBhaC',
+                'remember_token' => null,
+                'team_id'        => '1',
+            ],
+        ];
 
         User::insert($users);
         User::insert($users1);

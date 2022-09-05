@@ -57,8 +57,8 @@ class TransactionsController extends Controller
     public function store(StoreTransactionRequest $request)
     {
         $transaction = Transaction::create($request->all());
-
-        return redirect()->route('library.transactions.index');
+        echo "$transaction";
+        //return redirect()->route('library.transactions.index');
 
     }
 

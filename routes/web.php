@@ -12,7 +12,9 @@ Route::get('/home', function () {
 });
 
 Route::get('/library/transactions/getBookDetails/{id}',[AjaxController::class, 'getBookDetails']);
-
+Route::get('/library/transactions/getmemberDetails/{id}',[AjaxController::class, 'getmemberDetails']);
+Route::get('/library/transactions/getRfidTag/{id}',[AjaxController::class, 'getRfidTag']);
+Route::get('/library/transactions/getmember/{id}',[AjaxController::class, 'getMember']);
 Auth::routes();
 // Library
 

@@ -20,4 +20,36 @@ class AjaxController extends Controller
 
         return response()->json($bookDetails);
     }
+    public function getmemberDetails($rfid = 0): \Illuminate\Http\JsonResponse
+    {
+        $memberDetails['data'] = DB::table('users')
+            ->orderBy("id")
+            ->select('id','fname','lname','email','mobile')
+            ->where('rfid_tag',$rfid)
+            ->get();
+
+       return response()->json($memberDetails);
+    }
+    public function getRfidTag($bookid = null): \Illuminate\Http\JsonResponse
+    {
+        $bookrfidtag['data'] = DB::table('assets')
+            ->orderBy("id")
+            ->select('id','rfid_tag')
+            ->where('id',$bookid)
+            ->get();
+
+
+       return response()->json($bookrfidtag);
+    }
+    public function getMember($memberno = null): \Illuminate\Http\JsonResponse
+    {
+        $memberRfigtag['data'] = DB::table('users')
+            ->orderBy("id")
+            ->select('id','rfid_tag')
+            ->where('id',$memberno)
+            ->get();
+
+
+       return response()->json($memberRfigtag);
+    }
 }
