@@ -47,14 +47,14 @@
                             </td>
                             <td>
                                 @can('team_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('library.teams.show', $team->id) }}">
-                                        {{ trans('global.view') }}
+                                    <a  href="{{ route('library.teams.show', $team->id) }}">
+                                    <i class="fa fa-eye view" style=" margin-right:5px;" aria-hidden="true" ></i>
                                     </a>
                                 @endcan
 
                                 @can('team_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('library.teams.edit', $team->id) }}">
-                                        {{ trans('global.edit') }}
+                                    <a  href="{{ route('library.teams.edit', $team->id) }}">
+                                    <i class="fa fa-pencil  edit" style=" margin-right:5px;" aria-hidden="true" ></i>
                                     </a>
                                 @endcan
 
@@ -62,7 +62,9 @@
                                     <form action="{{ route('library.teams.destroy', $team->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <button type="submit" style=" border:none; background:none;"  value="{{ trans('global.delete') }}">
+                                        <i class="fa fa-trash delete"  aria-hidden="true"></i>
+                                        </button>
                                     </form>
                                 @endcan
 

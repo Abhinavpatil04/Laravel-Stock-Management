@@ -55,22 +55,24 @@
                             </td>
                             <td>
                                 @can('role_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('library.roles.show', $role->id) }}">
-                                        {{ trans('global.view') }}
+                                    <a  href="{{ route('library.roles.show', $role->id) }}">
+                                    <i class="fa fa-eye view"  style="margin-left:5px;"aria-hidden="true" ></i>
                                     </a>
                                 @endcan
-
+<br>
                                 @can('role_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('library.roles.edit', $role->id) }}">
-                                        {{ trans('global.edit') }}
+                                    <a  href="{{ route('library.roles.edit', $role->id) }}">
+                                    <i class="fa fa-pencil  edit" style="margin-left:5px;"aria-hidden="true" ></i>
                                     </a>
                                 @endcan
-
+                                   <br>
                                 @can('role_delete')
                                     <form action="{{ route('library.roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <button type="submit" style=" border:none; background:none;"  value="{{ trans('global.delete') }}">
+                                        <i class="fa fa-trash delete"  aria-hidden="true"></i>
+                                        </button>
                                     </form>
                                 @endcan
 

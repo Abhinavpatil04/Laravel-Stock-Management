@@ -25,16 +25,16 @@
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-    <header class="app-header navbar" style="background-color: black;">
+    <header class="app-header navbar" style="background-color: white;">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full">{{ trans('panel.site_title') }}</span>
-            <span class="navbar-brand-minimized">{{ trans('panel.site_title') }}</span>
+            <span class="navbar-brand-full ml-3  " style="font-weight:bold; color:navy;">{{ trans('panel.site_title') }}</span>
+            <span class="navbar-brand-minimized  " style="font-weight:bold; color:navy;">{{ trans('panel.site_title') }}</span>
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon ml-3" style="color:navy;"></span>
         </button>
 
         <ul class="nav navbar-nav ml-auto">

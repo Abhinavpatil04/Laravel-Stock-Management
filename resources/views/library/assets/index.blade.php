@@ -10,11 +10,11 @@
     </div>
 @endcan
 <div class="card">
-    <div class="card-header">
+    <div class="card-header" style="font-weight:bold;">
         {{ trans('cruds.asset.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body" >
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Asset">
                 <thead>
@@ -71,14 +71,14 @@
                             </td>
                             <td>
                                 @can('asset_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('library.assets.show', $asset->id) }}">
-                                        {{ trans('global.view') }}
+                                    <a href="{{ route('library.assets.show', $asset->id) }}" >
+                                    <i class="fa fa-eye view" style="margin-left:5px; " aria-hidden="true" ></i>
                                     </a>
                                 @endcan
 
                                 @can('asset_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('library.assets.edit', $asset->id) }}">
-                                        {{ trans('global.edit') }}
+                                    <a href="{{ route('library.assets.edit', $asset->id) }}">
+                                    <i class="fa fa-pencil  edit"  style="margin-left:5px; " aria-hidden="true" ></i>
                                     </a>
                                 @endcan
 
@@ -86,7 +86,9 @@
                                     <form action="{{ route('library.assets.destroy', $asset->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <button type="submit" style=" border:none; background:none;"  value="{{ trans('global.delete') }}">
+                                        <i class="fa fa-trash delete"  aria-hidden="true"></i>
+                                        </button>
                                     </form>
                                 @endcan
 
