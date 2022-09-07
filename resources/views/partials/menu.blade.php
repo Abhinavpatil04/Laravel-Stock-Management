@@ -23,7 +23,7 @@
 {{--            @can('stock_access')--}}
 {{--                <li class="nav-item">--}}
 {{--                    <a href="{{ route("library.stocks.index") }}" class="nav-link {{ request()->is('library/stocks') || request()->is('library/stocks/*') ? 'active' : '' }}"  style="color:black; font-weight:bold;">--}}
-{{--                        <i class="fa-fw fas fa-cogs nav-icon" style="color:black;">--}}
+{{--                        <i class=" fa-fw fas fa-cogs nav-icon" style="color:black;">--}}
 
 {{--                        </i>--}}
 {{--                        {{ trans('cruds.stock.title') }}--}}
