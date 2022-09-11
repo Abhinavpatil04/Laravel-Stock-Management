@@ -50,15 +50,20 @@ class TransactionsController extends Controller
         return view('library.transactions.create', compact('assets', 'users'));
     }
 
+    
+
     /**
      * @param StoreTransactionRequest $request
      * @return RedirectResponse
      */
     public function store(StoreTransactionRequest $request)
     {
-        $transaction = Transaction::create($request->all());
-        echo "$transaction";
-        //return redirect()->route('library.transactions.index');
+        $Asset = Asset::where('rfid_tag',$request->input('asset_id'))->get();
+        $member = User::where('rfid_tag',$request->input('member_id'))->get();
+        $issuedate = date("Y-m-d");
+        $returndate = date('Y-m-d', strtotime($issuedate. ' + 7 days'));  
+        $transaction = Transaction::create(array_merge($request->all(), ['member_id' => $member[0]->id,'asset_id' => $Asset[0]->id,'returnDate' => $returndate,'issueDate' => $issuedate]));
+        return redirect()->route('library.transactions.index');
 
     }
 
@@ -147,12 +152,14 @@ class TransactionsController extends Controller
                 'error' => 'No item was added/removed. Amount must be greater than 1.',
             ]);
         }
-
+         
+        
         Transaction::create([
             'stock'    => $sign . $stockAmount,
             'asset_id' => $stock->asset->id,
             'team_id'  => $stock->team->id,
             'user_id'  => auth()->user()->id,
+
         ]);
 
         if ($action == 'add') {
