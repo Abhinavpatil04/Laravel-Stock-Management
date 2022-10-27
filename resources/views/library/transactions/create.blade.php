@@ -78,8 +78,12 @@
             if((this.value).length === 10){
                 document.getElementById('asset_name_text').style.display = 'block';
                 document.getElementById('asset_name_text').disabled = true;
-               
-                getBookDetails(this.value);
+                document.getElementById('select_asset').style.display = 'none';
+
+                // document.getElementById('asset_name_text').style.display = 'block';
+                // document.getElementById('asset_name_text').disabled = true;
+
+                // getBookDetails(this.value);
             }else {
                 document.getElementById('asset_name_text').style.display = 'none';
                 document.getElementById('asset_name_text').disabled = true;
@@ -118,7 +122,7 @@
             if((this.value).length === 10){
                 document.getElementById('user_id_text').style.display = 'block';
                 document.getElementById('user_id_text').disabled = true;
-                
+
                 getmemberDetails(this.value);
             }else {
                 document.getElementById('user_id_text').style.display = 'none';
@@ -154,10 +158,10 @@
 
         }
 
-        
+
         function setrfid(e) {
             let bookid =parseInt(e.target.value);  // Double quotes
-           
+
             $.ajax({
                 url:'http://127.0.0.1:8000/library/transactions/getRfidTag/'+bookid,
                 type:'get',

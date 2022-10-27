@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Library\AjaxController;
 
 Route::redirect('/', '/login');
@@ -55,6 +55,10 @@ Route::group(['prefix' => 'library', 'as' => 'library.', 'namespace' => 'Library
 
 });
 
+//register
+Route::post('registration', 'RegisterController@index')->name('registration.register');
+//Route::get('registration', 'RegisterController@index')->name('registration.register');
+Route::get('/Register',[RegisterController::class, 'index'])->name('registration.register');
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password

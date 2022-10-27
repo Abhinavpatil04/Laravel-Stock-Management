@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 
 <head>
     <meta charset="UTF-8">
@@ -26,7 +25,7 @@
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
     <header class="app-header navbar" style="background-color: white;">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" id="case " type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
@@ -36,6 +35,79 @@
         <button class="navbar-toggler sidebar-toggler d-md-down-none ml-3" style="border:none; "type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon " style="color:navy;"></span>
         </button>
+
+        <!--******************* profile icon/btn ****************-->
+
+        <div class="dropdown-show" style="margin-left:62rem; " id="drop1" onclick="menuShow()">
+        <div class="profile" id="pro"style="position: relative;
+    border-radius: 50%;
+    border-style: inherit;
+    border-width: 1px;
+    background: #322da826;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: hidden;
+    cursor:pointer; ">
+        <i class="fa fw fas fa-user" style="color: navy; font-size:22px; "></i>
+</div>
+
+    <div class="dropdown-menu dropdown-menu-right togglemenu" id="hideshow" style="display:none;">
+
+    @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
+                @can('profile_password_edit')
+                    <li class="nav-item" style=" padding-top:10px;">
+                        <a class="nav-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}" href="{{ route('profile.password.edit') }}"  style="color:black; font-weight:bold;">
+                            <i class="fa-fw fas fa-key nav-icon" style="  color:black; margin-left:0; margin-right:5px;">
+                            </i>
+                            {{ trans('global.change_password') }}
+                        </a>
+                    </li>
+                @endcan
+            @endif
+
+<hr style="background:#322da826; width:150px;">
+
+            <li class="nav-item" style="float:left; padding-top:0; padding-bottom:10px;">
+                <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();"  style="color:black; font-weight:bold;">
+                    <i class="nav-icon fas fa-fw fa-sign-out-alt" style="color:black; margin-right:5px; ">
+
+                    </i>
+                    {{ trans('global.logout') }}
+                </a>
+            </li>
+
+</div>
+</div>
+
+<style >
+.togglemenu
+{
+    position:absolute;
+    top:65px;
+    right:25px;
+    padding:5px 10px;
+    background: white;
+    width:200px;
+    border-radius:8px;
+    transition:0.5s;
+ display:none;
+}
+.togglemenu::before{
+    content:'';
+    position:absolute;
+    top:-5px;
+    right:28px;
+    width:20px;
+    height:20px;
+    background:white;
+    transform:rotate(45deg);
+}
+
+    </style>
+
+
 
         <ul class="nav navbar-nav ml-auto">
             @if(count(config('panel.available_languages', [])) > 1)
@@ -108,7 +180,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script>
+    <script type="text/javascript">
+
+/**** profile show /hide ***/
+
+function menuShow()
+{
+document.getElementById('hideshow').style.display="block";
+
+}
+
+
         $(function() {
   let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
   let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
@@ -215,6 +297,7 @@
 
   $.fn.dataTable.ext.classes.sPageButton = '';
 });
+
 
     </script>
     @yield('scripts')

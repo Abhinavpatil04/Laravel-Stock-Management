@@ -9,6 +9,7 @@ textarea {
     width: 100% !important;
 }
 
+
 .sidebar .nav-link.active {
     color: #fff;
     background:#205787;
@@ -41,6 +42,7 @@ div.dataTables_wrapper div.dataTables_filter input {
     border-color: gray;
     border-radius: 12px;
 }
+
 
 .dataTables_wrapper.no-footer div.dataTables_scrollHead table.dataTable, .dataTables_wrapper.no-footer div.dataTables_scrollBody>table {
     border-bottom: none;
@@ -162,6 +164,8 @@ font-size: 20px;
     background-color: #d9e1e6;
     border-color: #d1dbe1;
 }
+
+
 
 .btn-group-xs > .btn,
 .btn-xs {
@@ -286,4 +290,29 @@ div.dataTables_wrapper div.dataTables_info {
     border-color: #4dbd74;
     border-style: outset;
     border-width: 3px;;
+}
+
+/***register css*******/
+
+.toggle-btn
+{
+border-radius: 30px;
+margin-left: 15px;
+    padding:10px 27px;
+	cursor:pointer;
+	background:white;
+    border: 0;
+    text-decoration: none!important;
+	outline: none!important;
+	position: relative;
+}
+
+.button-box
+{
+    border-style: none;
+    width: 500px;
+	margin:35px auto;
+	position:relative;
+	/*box-shadow: 0 0 15px 9px #867da71f;*/
+	border-radius: 30px;
 }

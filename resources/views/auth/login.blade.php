@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="row justify-content-center">
+<div class="row justify-content-center" style=" background-">
     <div class="col-md-6">
         <div class="card mx-4">
             <div class="card-body p-4">
@@ -60,6 +60,10 @@
                         <div class="col-6">
                             <button type="submit" class="btn btn-primary px-4">
                                 {{ trans('global.login') }}
+                            </button>
+
+                            <button   type="button"  class="btn btn-primary px-4" onclick="window.location.href='{{route('registration.register')}}'">
+                                {{ trans('global.register') }}
                             </button>
                         </div>
                         <div class="col-6 text-right">

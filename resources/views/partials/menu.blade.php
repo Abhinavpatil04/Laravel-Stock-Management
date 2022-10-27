@@ -40,17 +40,8 @@
                     </a>
                 </li>
             @endcan
-            @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
-                @can('profile_password_edit')
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}" href="{{ route('profile.password.edit') }}"  style="color:black; font-weight:bold;">
-                            <i class="fa-fw fas fa-key nav-icon" style="color:black;">
-                            </i>
-                            {{ trans('global.change_password') }}
-                        </a>
-                    </li>
-                @endcan
-            @endif
+
+
                 @can('user_management_access')
                     <li class="nav-item nav-dropdown " >
                         <a class="nav-link  nav-dropdown-toggle" href="#"  style="color:black; font-weight:bold;">
@@ -103,14 +94,7 @@
                         </ul>
                     </li>
                 @endcan
-            <li class="nav-item">
-                <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();"  style="color:black; font-weight:bold;">
-                    <i class="nav-icon fas fa-fw fa-sign-out-alt" style="color:black;">
 
-                    </i>
-                    {{ trans('global.logout') }}
-                </a>
-            </li>
         </ul>
 
     </nav>
